@@ -1,0 +1,116 @@
+[gd_scene load_steps=9 format=3 uid="uid://cpu8sebru3wf"]
+
+[ext_resource type="Texture2D" uid="uid://bqhscc4njan1l" path="res://art/UI/Complete_GUI_Essential_Pack_v2.2/02_Paper_Collection/01_Paper_Theme/Sprites/UI_Paper_Frame_01_Horizontal.png" id="1_ng1nx"]
+[ext_resource type="Texture2D" uid="uid://c8lxkkqbdmkw5" path="res://art/UI/Complete_GUI_Essential_Pack_v2.2/02_Paper_Collection/01_Paper_Theme/Sprites/UI_Paper_Cross_Small.png" id="2_dg4rv"]
+[ext_resource type="Script" path="res://game_components/Inventory.gd" id="2_e788r"]
+[ext_resource type="Texture2D" uid="uid://cf1wegxy3ib8x" path="res://art/UI/Complete_GUI_Essential_Pack_v2.2/02_Paper_Collection/01_Paper_Theme/Sprites/UI_Paper_Cross_Standard.png" id="3_4g0jn"]
+[ext_resource type="Texture2D" uid="uid://cychx3wannh8c" path="res://art/UI/Complete_GUI_Essential_Pack_v2.2/02_Paper_Collection/01_Paper_Theme/Sprites/UI_Paper_Banner_02.png" id="4_ba1y3"]
+[ext_resource type="Texture2D" uid="uid://cxgc00tisyms8" path="res://art/UI/Complete_GUI_Essential_Pack_v2.2/02_Paper_Collection/01_Paper_Theme/Sprites/UI_Paper_Select_01a1.png" id="5_uk14n"]
+[ext_resource type="Texture2D" uid="uid://bwffe2vx7uv56" path="res://art/UI/Complete_GUI_Essential_Pack_v2.2/02_Paper_Collection/01_Paper_Theme/Sprites/UI_Paper_Select_01a3.png" id="7_ldga3"]
+[ext_resource type="Texture2D" uid="uid://btahg6xhbk5dl" path="res://art/UI/Complete_GUI_Essential_Pack_v2.2/02_Paper_Collection/01_Paper_Theme/Sprites/UI_Paper_Select_02a2.png" id="8_gqdy8"]
+
+[node name="InventoryContainer" type="CanvasGroup"]
+z_index = 10
+script = ExtResource("2_e788r")
+inventory_panel_path = NodePath("InventoryPanel")
+item_slot_template_path = NodePath("InventoryPanel/ItemSlotTemplate")
+item_template_path = NodePath("InventoryPanel/ItemSlotTemplate/ItemTemplate")
+stack_count_template_path = NodePath("InventoryPanel/ItemSlotTemplate/StackCountTemplate")
+max_slots = Vector2i(36, 2)
+
+[node name="Background" type="NinePatchRect" parent="."]
+modulate = Color(1, 1, 1, 0.780392)
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 96.0
+offset_top = 58.0
+offset_right = 396.0
+offset_bottom = 208.0
+grow_vertical = 2
+texture = ExtResource("1_ng1nx")
+region_rect = Rect2(-0.51186, -0.148476, 96.6183, 32.8367)
+patch_margin_left = 16
+patch_margin_top = 9
+patch_margin_right = 12
+patch_margin_bottom = 8
+metadata/_edit_use_anchors_ = true
+
+[node name="CloseButton" type="TextureButton" parent="."]
+offset_left = 398.0
+offset_top = 43.0
+offset_right = 430.0
+offset_bottom = 75.0
+scale = Vector2(0.471328, 0.471328)
+tooltip_text = "close"
+texture_normal = ExtResource("2_dg4rv")
+texture_pressed = ExtResource("2_dg4rv")
+texture_hover = ExtResource("3_4g0jn")
+metadata/_edit_use_anchors_ = true
+
+[node name="InventoryPanel" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(300, 0)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 95.0
+offset_top = 61.0
+offset_right = 395.0
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("4_ba1y3")
+region_rect = Rect2(15.7038, 7.41875, 64.3221, 16.8913)
+patch_margin_left = 14
+patch_margin_top = 5
+patch_margin_right = 14
+patch_margin_bottom = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="ItemSlotTemplate" type="TextureButton" parent="InventoryPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.00333333
+anchor_top = -0.1
+anchor_right = 0.00333333
+anchor_bottom = -0.1
+offset_left = 7.0
+offset_top = 4.0
+offset_right = 39.0
+offset_bottom = 36.0
+scale = Vector2(0.23833, 0.23833)
+texture_normal = ExtResource("5_uk14n")
+texture_pressed = ExtResource("7_ldga3")
+texture_hover = ExtResource("8_gqdy8")
+metadata/_edit_use_anchors_ = true
+
+[node name="ItemTemplate" type="TextureRect" parent="InventoryPanel/ItemSlotTemplate"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.321469
+anchor_top = -1.37044
+anchor_right = -0.321469
+anchor_bottom = -1.37044
+offset_left = 14.4829
+offset_top = 48.05
+offset_right = 39.4829
+offset_bottom = 73.05
+metadata/_edit_use_anchors_ = true
+
+[node name="StackCountTemplate" type="Label" parent="InventoryPanel/ItemSlotTemplate"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.17627
+anchor_top = -1.44945
+anchor_right = 1.17627
+anchor_bottom = -1.44945
+offset_left = -16.6614
+offset_top = 67.3618
+offset_right = 12.3386
+offset_bottom = 93.3618
+scale = Vector2(0.316478, 0.298423)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "x0
+"
+metadata/_edit_use_anchors_ = true

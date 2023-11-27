@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CollectibleResource" load_steps=3 format=3 uid="uid://dc2s3egvlp1yl"]
+
+[ext_resource type="Texture2D" uid="uid://bhn2w2kcojwwi" path="res://art/Objects/Items/icon_wood.png" id="1_2xckg"]
+[ext_resource type="Script" path="res://game_components/resources/collectible_resource.gd" id="1_er6m3"]
+
+[resource]
+script = ExtResource("1_er6m3")
+icon = ExtResource("1_2xckg")
+consumable = false
+equippable = false
+stackable = true
+max_stack = 64
+stack_count = 1

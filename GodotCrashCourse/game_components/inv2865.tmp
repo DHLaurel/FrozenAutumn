@@ -1,0 +1,148 @@
+[gd_scene load_steps=10 format=3 uid="uid://cpu8sebru3wf"]
+
+[ext_resource type="Texture2D" uid="uid://bqhscc4njan1l" path="res://art/UI/Complete_GUI_Essential_Pack_v2.2/02_Paper_Collection/01_Paper_Theme/Sprites/UI_Paper_Frame_01_Horizontal.png" id="1_ng1nx"]
+[ext_resource type="Texture2D" uid="uid://c8lxkkqbdmkw5" path="res://art/UI/Complete_GUI_Essential_Pack_v2.2/02_Paper_Collection/01_Paper_Theme/Sprites/UI_Paper_Cross_Small.png" id="2_dg4rv"]
+[ext_resource type="Script" path="res://game_components/Inventory.gd" id="2_e788r"]
+[ext_resource type="Texture2D" uid="uid://cf1wegxy3ib8x" path="res://art/UI/Complete_GUI_Essential_Pack_v2.2/02_Paper_Collection/01_Paper_Theme/Sprites/UI_Paper_Cross_Standard.png" id="3_4g0jn"]
+[ext_resource type="Texture2D" uid="uid://cychx3wannh8c" path="res://art/UI/Complete_GUI_Essential_Pack_v2.2/02_Paper_Collection/01_Paper_Theme/Sprites/UI_Paper_Banner_02.png" id="4_ba1y3"]
+[ext_resource type="Texture2D" uid="uid://cxgc00tisyms8" path="res://art/UI/Complete_GUI_Essential_Pack_v2.2/02_Paper_Collection/01_Paper_Theme/Sprites/UI_Paper_Select_01a1.png" id="5_uk14n"]
+[ext_resource type="Texture2D" uid="uid://bhn2w2kcojwwi" path="res://art/Objects/Items/icon_wood.png" id="6_0l1ws"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_4rabv"]
+pressed = true
+
+[sub_resource type="Shortcut" id="Shortcut_a2ius"]
+events = [SubResource("InputEventAction_4rabv")]
+
+[node name="InventoryContainer" type="NinePatchRect"]
+modulate = Color(1, 1, 1, 0.780392)
+z_index = 10
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -59.0
+offset_top = -28.0
+offset_right = 64.0
+offset_bottom = 49.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_ng1nx")
+region_rect = Rect2(-0.51186, -0.148476, 96.6183, 32.8367)
+patch_margin_left = 16
+patch_margin_top = 9
+patch_margin_right = 12
+patch_margin_bottom = 8
+script = ExtResource("2_e788r")
+inventory_panel = NodePath("InventoryPanel")
+item_slot_template = NodePath("InventoryPanel/ItemSlot")
+item_template = NodePath("InventoryPanel/ItemSlot/Item")
+max_slots = Vector2(6, 3)
+
+[node name="CloseButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 120.0
+offset_top = -12.0
+offset_right = 152.0
+offset_bottom = 20.0
+scale = Vector2(0.471328, 0.471328)
+tooltip_text = "close"
+shortcut = SubResource("Shortcut_a2ius")
+texture_normal = ExtResource("2_dg4rv")
+texture_pressed = ExtResource("2_dg4rv")
+texture_hover = ExtResource("3_4g0jn")
+
+[node name="InventoryPanel" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 3.0
+offset_right = 118.0
+offset_bottom = 37.0
+texture = ExtResource("4_ba1y3")
+region_rect = Rect2(15.7038, 7.41875, 64.3221, 16.8913)
+patch_margin_left = 14
+patch_margin_top = 5
+patch_margin_right = 14
+patch_margin_bottom = 4
+
+[node name="ItemSlot" type="TextureRect" parent="InventoryPanel"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 3.99999
+offset_right = 39.0
+offset_bottom = 36.0
+scale = Vector2(0.237923, 0.237923)
+texture = ExtResource("5_uk14n")
+
+[node name="Item" type="TextureRect" parent="InventoryPanel/ItemSlot"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 29.0
+offset_bottom = 29.0
+texture = ExtResource("6_0l1ws")
+
+[node name="ItemSlot2" type="TextureRect" parent="InventoryPanel"]
+offset_left = 15.0
+offset_top = 4.0
+offset_right = 47.0
+offset_bottom = 36.0
+scale = Vector2(0.237923, 0.237923)
+texture = ExtResource("5_uk14n")
+
+[node name="Item" type="TextureRect" parent="InventoryPanel/ItemSlot2"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 29.0
+offset_bottom = 29.0
+texture = ExtResource("6_0l1ws")
+
+[node name="ItemSlot3" type="TextureRect" parent="InventoryPanel"]
+offset_left = 7.0
+offset_top = 12.0
+offset_right = 39.0
+offset_bottom = 44.0
+scale = Vector2(0.237923, 0.237923)
+texture = ExtResource("5_uk14n")
+
+[node name="Item" type="TextureRect" parent="InventoryPanel/ItemSlot3"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 29.0
+offset_bottom = 29.0
+texture = ExtResource("6_0l1ws")
+
+[node name="ItemSlot4" type="TextureRect" parent="InventoryPanel"]
+offset_left = 7.0
+offset_top = 20.0
+offset_right = 39.0
+offset_bottom = 52.0
+scale = Vector2(0.237923, 0.237923)
+texture = ExtResource("5_uk14n")
+
+[node name="Item" type="TextureRect" parent="InventoryPanel/ItemSlot4"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 29.0
+offset_bottom = 29.0
+texture = ExtResource("6_0l1ws")
+
+[node name="ItemSlot5" type="TextureRect" parent="InventoryPanel"]
+offset_left = 23.0
+offset_top = 4.0
+offset_right = 55.0
+offset_bottom = 36.0
+scale = Vector2(0.237923, 0.237923)
+texture = ExtResource("5_uk14n")
+
+[node name="Item" type="TextureRect" parent="InventoryPanel/ItemSlot5"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 29.0
+offset_bottom = 29.0
+texture = ExtResource("6_0l1ws")

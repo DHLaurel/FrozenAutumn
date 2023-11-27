@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://6krbtnstw25n"]
+
+[ext_resource type="PackedScene" uid="uid://ri4vqebv4pev" path="res://game_components/interact_area.tscn" id="2_4cbcp"]
+
+[sub_resource type="GDScript" id="GDScript_xb8l5"]
+script/source = "extends Interactable
+
+
+"
+
+[node name="Teleporter" type="Area2D"]
+script = SubResource("GDScript_xb8l5")
+
+[node name="InteractArea" parent="." instance=ExtResource("2_4cbcp")]
+scale = Vector2(0.180397, 0.180397)

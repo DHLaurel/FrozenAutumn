@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "GodotCrashCourse": {
+      "commandName": "Project",
+      "commandLineArgs": "-e --path \"C:\\Users\\xxmz_\\Documents\\Godot\\GodotCrashCourse\"",
+      "workingDirectory": "$(ProjectDir)"
+    }
+  }
+}

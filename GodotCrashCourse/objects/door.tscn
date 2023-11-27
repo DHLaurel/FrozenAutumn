@@ -1,0 +1,150 @@
+[gd_scene load_steps=20 format=3 uid="uid://c47cy34266s6f"]
+
+[ext_resource type="Texture2D" uid="uid://bo27tki6iexcf" path="res://art/Tilesets/Wooden House.png" id="1_x4twa"]
+[ext_resource type="Script" path="res://objects/door.gd" id="2_0uqtx"]
+[ext_resource type="PackedScene" uid="uid://ri4vqebv4pev" path="res://game_components/interact_area.tscn" id="3_p31dg"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_k8yxf"]
+animation = &"door_close"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_w0jnl"]
+animation = &"door_closed"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_t4xph"]
+animation = &"door_open"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_v7au7"]
+animation = &"door_opened"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ydlyx"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_d0fva"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_y7p0d"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_t0uin"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qquyd"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_t6g7v"]
+states/door_close/node = SubResource("AnimationNodeAnimation_k8yxf")
+states/door_close/position = Vector2(407, 182)
+states/door_closed/node = SubResource("AnimationNodeAnimation_w0jnl")
+states/door_closed/position = Vector2(407, 100)
+states/door_open/node = SubResource("AnimationNodeAnimation_t4xph")
+states/door_open/position = Vector2(637, 100)
+states/door_opened/node = SubResource("AnimationNodeAnimation_v7au7")
+states/door_opened/position = Vector2(637, 182)
+transitions = ["Start", "door_closed", SubResource("AnimationNodeStateMachineTransition_ydlyx"), "door_closed", "door_open", SubResource("AnimationNodeStateMachineTransition_d0fva"), "door_open", "door_opened", SubResource("AnimationNodeStateMachineTransition_y7p0d"), "door_opened", "door_close", SubResource("AnimationNodeStateMachineTransition_t0uin"), "door_close", "door_closed", SubResource("AnimationNodeStateMachineTransition_qquyd")]
+
+[sub_resource type="Animation" id="Animation_pfhrl"]
+resource_name = "door_close"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [7, 10, 4]
+}
+
+[sub_resource type="Animation" id="Animation_7kh2a"]
+resource_name = "door_closed"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="Animation" id="Animation_ahk3d"]
+resource_name = "door_open"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [4, 10, 7]
+}
+
+[sub_resource type="Animation" id="Animation_t62fs"]
+resource_name = "door_opened"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l5ekk"]
+_data = {
+"door_close": SubResource("Animation_pfhrl"),
+"door_closed": SubResource("Animation_7kh2a"),
+"door_open": SubResource("Animation_ahk3d"),
+"door_opened": SubResource("Animation_t62fs")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3pktr"]
+size = Vector2(17.2329, 5)
+
+[node name="Door" type="Sprite2D"]
+position = Vector2(-0.25, 0)
+scale = Vector2(0.986486, 1)
+texture = ExtResource("1_x4twa")
+hframes = 3
+vframes = 5
+frame = 4
+script = ExtResource("2_0uqtx")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_t6g7v")
+anim_player = NodePath("../AnimationPlayer")
+active = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_l5ekk")
+}
+
+[node name="InteractArea" parent="." instance=ExtResource("3_p31dg")]
+scale = Vector2(0.157078, 0.157078)
+interact_label = "Door"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-0.253425, 5.49999)
+shape = SubResource("RectangleShape2D_3pktr")
+
+[connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]
+[connection signal="interaction_executed" from="InteractArea" to="." method="_on_interact_area_interaction_executed"]

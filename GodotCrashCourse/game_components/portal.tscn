@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://642ev5arw58s"]
+
+[ext_resource type="Script" path="res://levels/portal.gd" id="1_mq35i"]
+[ext_resource type="PackedScene" uid="uid://ri4vqebv4pev" path="res://game_components/interact_area.tscn" id="2_hn5yr"]
+
+[node name="Portal" type="Node2D"]
+script = ExtResource("1_mq35i")
+dest_scene = null
+
+[node name="InteractArea" parent="." instance=ExtResource("2_hn5yr")]
+scale = Vector2(0.0906917, 0.0906917)
+interact_label = "Portal"
+interact_type = 4
+
+[connection signal="body_entered" from="InteractArea" to="." method="_on_interact_area_body_entered"]
+[connection signal="body_exited" from="InteractArea" to="." method="_on_interact_area_body_exited"]

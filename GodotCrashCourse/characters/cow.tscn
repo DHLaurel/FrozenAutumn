@@ -1,0 +1,248 @@
+[gd_scene load_steps=23 format=3 uid="uid://dv8oanxo7o5jh"]
+
+[ext_resource type="Script" path="res://characters/cow.gd" id="1_qaw05"]
+[ext_resource type="Texture2D" uid="uid://0o7s6eqnja5p" path="res://art/Characters/Free Cow Sprites.png" id="2_5kdve"]
+[ext_resource type="PackedScene" uid="uid://ri4vqebv4pev" path="res://game_components/interact_area.tscn" id="3_fsx02"]
+[ext_resource type="Texture2D" uid="uid://18xbxrd6aubp" path="res://art/Tilesets/ground tiles/Water.png" id="4_vf8v8"]
+[ext_resource type="AudioStream" uid="uid://tlvpr46jrju2" path="res://audio/sounds/cow-moo-1744.mp3" id="5_uosoe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2avao"]
+size = Vector2(16, 3)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_h71h7"]
+animation = &"idle_right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_myfmc"]
+animation = &"under_attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_r33af"]
+animation = &"walk_right"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jjuq0"]
+advance_mode = 0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_q5dt2"]
+advance_mode = 0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mgrgt"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_45xh1"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_m16dg"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ehwbe"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_57dsc"]
+states/End/position = Vector2(1161, 111)
+states/Start/position = Vector2(532, 111)
+states/idle_right/node = SubResource("AnimationNodeAnimation_h71h7")
+states/idle_right/position = Vector2(690, 109)
+states/under_attack/node = SubResource("AnimationNodeAnimation_myfmc")
+states/under_attack/position = Vector2(804, 210)
+states/walk_right/node = SubResource("AnimationNodeAnimation_r33af")
+states/walk_right/position = Vector2(913, 106)
+transitions = ["idle_right", "walk_right", SubResource("AnimationNodeStateMachineTransition_jjuq0"), "walk_right", "idle_right", SubResource("AnimationNodeStateMachineTransition_q5dt2"), "Start", "idle_right", SubResource("AnimationNodeStateMachineTransition_mgrgt"), "idle_right", "under_attack", SubResource("AnimationNodeStateMachineTransition_45xh1"), "under_attack", "walk_right", SubResource("AnimationNodeStateMachineTransition_m16dg"), "walk_right", "under_attack", SubResource("AnimationNodeStateMachineTransition_ehwbe")]
+
+[sub_resource type="Animation" id="Animation_pg4mj"]
+resource_name = "flee_right"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [3, 4, 2, 3, 4, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_bva2v"]
+resource_name = "idle_moo"
+length = 6.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 2.6, 2.8, 3, 3.23105),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 2, 0, 2, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1, 3.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_n6v8a"]
+resource_name = "idle_right"
+length = 6.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 2.6, 2.8, 3, 3.23105),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 2, 0, 2, 0]
+}
+
+[sub_resource type="Animation" id="Animation_svqu3"]
+resource_name = "under_attack"
+length = 2.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(0, -2), Vector2(0, 0), Vector2(0, -2), Vector2(0, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [3],
+"method": &"change_state"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_iexbv"]
+resource_name = "walk_right"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [3, 4, 2, 3, 4, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i8ja7"]
+_data = {
+"flee_right": SubResource("Animation_pg4mj"),
+"idle_moo": SubResource("Animation_bva2v"),
+"idle_right": SubResource("Animation_n6v8a"),
+"under_attack": SubResource("Animation_svqu3"),
+"walk_right": SubResource("Animation_iexbv")
+}
+
+[node name="Cow" type="CharacterBody2D"]
+position = Vector2(2, -13)
+script = ExtResource("1_qaw05")
+_bark_list = Array[String](["moo", "moo", "meoh.... err...", "moo", "moo", "moo", "moo", "moo", "moo", "moo", "moo", "moo", "", ""])
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -2)
+texture = ExtResource("2_5kdve")
+hframes = 3
+vframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+y_sort_enabled = true
+position = Vector2(-2, 9.5)
+shape = SubResource("RectangleShape2D_2avao")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_57dsc")
+anim_player = NodePath("../AnimationPlayer")
+active = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_i8ja7")
+}
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="InteractArea" parent="." instance=ExtResource("3_fsx02")]
+position = Vector2(1, 5)
+scale = Vector2(0.186045, 0.186045)
+interact_label = "Cow"
+interact_type = 2
+interact_value = "Moo"
+
+[node name="BarkText" type="Label" parent="."]
+offset_left = -35.0
+offset_top = -9.0
+offset_right = 179.0
+offset_bottom = 17.0
+scale = Vector2(0.303827, 0.230766)
+horizontal_alignment = 1
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+offset_left = -18.0
+offset_top = 15.0
+offset_right = 46.0
+offset_bottom = 31.0
+scale = Vector2(0.498234, 0.214529)
+texture_progress = ExtResource("4_vf8v8")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_uosoe")
+volume_db = -17.333
+pitch_scale = 1.45
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="attack_executed" from="InteractArea" to="." method="_on_interact_area_attack_executed"]
+[connection signal="interaction_executed" from="InteractArea" to="." method="_on_interact_area_interaction_executed"]

@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://d6rcdd87c0xj"]
+
+[ext_resource type="Script" path="res://game_components/GameScene.gd" id="1_43xo5"]
+[ext_resource type="PackedScene" uid="uid://bk2yo2tq1ivrm" path="res://levels/game_level.tscn" id="1_74m0b"]
+[ext_resource type="PackedScene" uid="uid://fvq6xrladdbx" path="res://characters/player_cat.tscn" id="3_u0h0f"]
+
+[node name="MainScene" type="Node2D"]
+y_sort_enabled = true
+position = Vector2(801, 478)
+
+[node name="GameScene" type="Node2D" parent="."]
+y_sort_enabled = true
+script = ExtResource("1_43xo5")
+
+[node name="PlayerCat" parent="GameScene" instance=ExtResource("3_u0h0f")]
+y_sort_enabled = true
+position = Vector2(193, 51)
+rotation = -0.001385
+sprint_multiplier = 3.0
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="GameScene/PlayerCat"]
+rotation = 0.001385
+remote_path = NodePath("../../Camera2D")
+
+[node name="Levels" type="Node2D" parent="GameScene"]
+y_sort_enabled = true
+position = Vector2(-801, -478)
+
+[node name="GameLevel" parent="GameScene/Levels" instance=ExtResource("1_74m0b")]
+position = Vector2(801, 478)
+
+[node name="Camera2D" type="Camera2D" parent="GameScene"]
+position = Vector2(193, 51)

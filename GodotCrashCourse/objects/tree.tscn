@@ -1,0 +1,176 @@
+[gd_scene load_steps=22 format=3 uid="uid://ck1rx11guc5p1"]
+
+[ext_resource type="Texture2D" uid="uid://b8ua2khmnftyp" path="res://art/Objects/Tree animations/tree sprites.png" id="1_lm1pi"]
+[ext_resource type="Script" path="res://objects/tree.gd" id="2_edw1e"]
+[ext_resource type="Texture2D" uid="uid://cbi1w2m3yte4p" path="res://art/Objects/Trees, stumps and bushes.png" id="3_oi8mk"]
+[ext_resource type="PackedScene" uid="uid://ri4vqebv4pev" path="res://game_components/interact_area.tscn" id="4_j1nkt"]
+[ext_resource type="AudioStream" uid="uid://oiajycxa2slb" path="res://audio/sounds/axe_cutting_wood_slice1.mp3" id="5_mcgpm"]
+[ext_resource type="PackedScene" uid="uid://c65lq6uimxnbs" path="res://objects/wood.tscn" id="6_fytul"]
+
+[sub_resource type="Animation" id="Animation_l6b4s"]
+resource_name = "stump_break"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AudioStreamPlayer:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_6jcpq"]
+resource_name = "tree_chop"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [12, 13, 14, 15]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_rkkcf"]
+resource_name = "tree_sway"
+length = 3.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tm0bm"]
+_data = {
+"stump_break": SubResource("Animation_l6b4s"),
+"tree_chop": SubResource("Animation_6jcpq"),
+"tree_sway": SubResource("Animation_rkkcf")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_57vx1"]
+animation = &"stump_break"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ekdcb"]
+animation = &"tree_chop"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sifh3"]
+animation = &"tree_sway"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mlp7o"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_q6ct7"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_j06wu"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sgybx"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3ugkb"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kkr5n"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_5ditd"]
+states/Start/position = Vector2(420, 100)
+states/stump_break/node = SubResource("AnimationNodeAnimation_57vx1")
+states/stump_break/position = Vector2(760, 135)
+states/tree_chop/node = SubResource("AnimationNodeAnimation_ekdcb")
+states/tree_chop/position = Vector2(610, 176)
+states/tree_sway/node = SubResource("AnimationNodeAnimation_sifh3")
+states/tree_sway/position = Vector2(610, 100)
+transitions = ["Start", "tree_sway", SubResource("AnimationNodeStateMachineTransition_mlp7o"), "tree_chop", "tree_sway", SubResource("AnimationNodeStateMachineTransition_q6ct7"), "tree_sway", "tree_chop", SubResource("AnimationNodeStateMachineTransition_j06wu"), "tree_sway", "stump_break", SubResource("AnimationNodeStateMachineTransition_sgybx"), "tree_chop", "stump_break", SubResource("AnimationNodeStateMachineTransition_3ugkb"), "stump_break", "End", SubResource("AnimationNodeStateMachineTransition_kkr5n")]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y2fo0"]
+radius = 4.12311
+
+[node name="Tree" type="Sprite2D"]
+y_sort_enabled = true
+position = Vector2(0, -9)
+texture = ExtResource("1_lm1pi")
+offset = Vector2(0, -10)
+hframes = 12
+vframes = 5
+frame = 47
+script = ExtResource("2_edw1e")
+
+[node name="Stump" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(0, 13)
+texture = ExtResource("3_oi8mk")
+offset = Vector2(0, -10)
+hframes = 12
+vframes = 7
+frame = 73
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_tm0bm")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_5ditd")
+anim_player = NodePath("../AnimationPlayer")
+active = true
+
+[node name="InteractArea" parent="." instance=ExtResource("4_j1nkt")]
+position = Vector2(0, 5)
+scale = Vector2(0.0659471, 0.0671968)
+interact_label = "Tree"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 5)
+shape = SubResource("CircleShape2D_y2fo0")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_mcgpm")
+
+[node name="Wood" parent="AudioStreamPlayer" instance=ExtResource("6_fytul")]
+
+[connection signal="attack_executed" from="InteractArea" to="." method="_on_interact_area_attack_executed"]

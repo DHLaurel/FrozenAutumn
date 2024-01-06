@@ -3,7 +3,7 @@
 [ext_resource type="TileSet" uid="uid://cdd7oid7a6yiu" path="res://art/Tilesets/game_level.tres" id="2_7q6gs"]
 [ext_resource type="AudioStream" uid="uid://dxi5ixb0gras4" path="res://audio/music/Summer Rain.mp3" id="3_0axiv"]
 [ext_resource type="PackedScene" uid="uid://du070s65sog85" path="res://characters/npc_cat.tscn" id="8_mqd2i"]
-[ext_resource type="PackedScene" uid="uid://c65lq6uimxnbs" path="res://objects/wood.tscn" id="9_71nxu"]
+[ext_resource type="PackedScene" uid="uid://c65lq6uimxnbs" path="res://objects/wood.tscn" id="9_0mnp3"]
 [ext_resource type="PackedScene" uid="uid://ck1rx11guc5p1" path="res://objects/tree.tscn" id="9_ibu2u"]
 [ext_resource type="PackedScene" uid="uid://dv8oanxo7o5jh" path="res://characters/cow.tscn" id="9_vrygx"]
 [ext_resource type="PackedScene" uid="uid://co5vwhi8rl7fw" path="res://objects/chest.tscn" id="11_ogmwi"]
@@ -134,5 +134,5 @@ position = Vector2(585, 206)
 [node name="Tree6" parent="." instance=ExtResource("9_ibu2u")]
 position = Vector2(585, 209)
 
-[node name="Wood" parent="." instance=ExtResource("9_71nxu")]
-position = Vector2(-226, -155)
+[node name="Wood" parent="." instance=ExtResource("9_0mnp3")]
+position = Vector2(286, 75)

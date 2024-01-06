@@ -25,7 +25,7 @@ func open_door():
 	
 func close_door():
 	print("closing door")
-	state_machine.travel("door_close")  # Ends with door_opened
+	state_machine.travel("door_close")  # Ends with door_closed
 	
 func interact():
 	if not locked:
@@ -45,11 +45,13 @@ func _on_interact_area_interaction_executed():
 func _on_animation_tree_animation_finished(anim_name):
 	print("anim_name")
 	if anim_name == "door_opened":
-		static_body.process_mode = Node.PROCESS_MODE_DISABLED
+		# static_body.process_mode = Node.PROCESS_MODE_DISABLED
 		# get_tree().change_scene_to_file(portal_destination)
 		GlobalNode.change_scene(portal_destination, position_destination)
-		
+		is_open = false
+		close_door()
 		print("Got here")
 		
 	if anim_name == "door_closed":
-		static_body.process_mode = Node.PROCESS_MODE_ALWAYS
+		pass
+		# static_body.process_mode = Node.PROCESS_MODE_ALWAYS

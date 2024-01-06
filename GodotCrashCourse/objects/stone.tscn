@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dcg8rapme8evs"]
+
+[ext_resource type="Texture2D" uid="uid://drkr0kdun26rw" path="res://art/Objects/Items/tools and meterials.png" id="1_dbmv3"]
+[ext_resource type="PackedScene" uid="uid://ri4vqebv4pev" path="res://game_components/interact_area.tscn" id="2_tgx3o"]
+[ext_resource type="Resource" uid="uid://dmdy1cbje7gqf" path="res://game_components/resources/collectibles/stone.tres" id="3_2vw5n"]
+
+[node name="Stone" type="Sprite2D"]
+position = Vector2(7, 7)
+texture = ExtResource("1_dbmv3")
+region_enabled = true
+region_rect = Rect2(17, 34, 14, 14.218)
+
+[node name="InteractArea" parent="." node_paths=PackedStringArray("interact_icon") instance=ExtResource("2_tgx3o")]
+scale = Vector2(0.0880358, 0.0864006)
+interact_label = "Stone"
+interact_type = 5
+interact_value = "stone"
+interact_icon = NodePath("..")
+collectible_resource = ExtResource("3_2vw5n")
+collectible_count = 1

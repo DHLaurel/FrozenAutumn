@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://game_components/game_clock.gd" id="4_mk6cg"]
 
 [node name="MainScene" type="Node2D"]
+process_mode = 3
 y_sort_enabled = true
 
 [node name="GameScene" type="Node2D" parent="."]
@@ -33,6 +34,7 @@ y_sort_enabled = true
 position = Vector2(982, 533)
 
 [node name="ClockCanvas" type="CanvasGroup" parent="GameScene"]
+process_mode = 1
 position = Vector2(982, 533)
 
 [node name="UiPaperDropdownBar" type="Sprite2D" parent="GameScene/ClockCanvas"]

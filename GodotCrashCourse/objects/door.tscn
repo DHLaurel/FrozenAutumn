@@ -1,8 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://c47cy34266s6f"]
+[gd_scene load_steps=21 format=3 uid="uid://c47cy34266s6f"]
 
 [ext_resource type="Texture2D" uid="uid://bo27tki6iexcf" path="res://art/Tilesets/Wooden House.png" id="1_x4twa"]
 [ext_resource type="Script" path="res://objects/door.gd" id="2_0uqtx"]
 [ext_resource type="PackedScene" uid="uid://ri4vqebv4pev" path="res://game_components/interact_area.tscn" id="3_p31dg"]
+[ext_resource type="AudioStream" uid="uid://2kjrsqbvqgdq" path="res://audio/sounds/chest-opening-87569.mp3" id="3_r4a76"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_k8yxf"]
 animation = &"door_close"
@@ -76,7 +77,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_ahk3d"]
 resource_name = "door_open"
-length = 0.4
+length = 0.8
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -88,6 +89,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [4, 10, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_t62fs"]
@@ -145,6 +158,10 @@ interact_label = "Door"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(-0.253425, 5.49999)
 shape = SubResource("RectangleShape2D_3pktr")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_r4a76")
+pitch_scale = 0.75
 
 [connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]
 [connection signal="interaction_executed" from="InteractArea" to="." method="_on_interact_area_interaction_executed"]

@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://c47cy34266s6f" path="res://objects/door.tscn" id="7_xsgxu"]
 
 [node name="Indoor_Level" type="Node2D"]
+process_mode = 1
 y_sort_enabled = true
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -94,7 +95,6 @@ position = Vector2(147, 46)
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_ro7ol")
-autoplay = true
 
 [node name="Door" parent="." instance=ExtResource("7_xsgxu")]
 z_index = 2

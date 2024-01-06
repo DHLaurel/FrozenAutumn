@@ -17,3 +17,4 @@ interact_type = 5
 interact_value = "wood"
 interact_icon = NodePath("..")
 collectible_resource = ExtResource("3_5l1to")
+collectible_count = 1

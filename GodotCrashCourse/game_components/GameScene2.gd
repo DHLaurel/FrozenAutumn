@@ -1,8 +1,13 @@
 extends Node2D
 
+@export var tick_speed : int = 2
+
 var game_paused = false
 
 func _ready():
+	GlobalNode.game_scene = self
+	GlobalNode.tick_speed = tick_speed
+	GlobalNode.paused = game_paused
 	GlobalNode.levels = $Levels
 	GlobalNode.player = $PlayerCat
 	GlobalNode.game_clock = $ClockCanvas/GameClock

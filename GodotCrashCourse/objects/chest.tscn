@@ -1,9 +1,14 @@
-[gd_scene load_steps=18 format=3 uid="uid://co5vwhi8rl7fw"]
+[gd_scene load_steps=24 format=3 uid="uid://co5vwhi8rl7fw"]
 
 [ext_resource type="Texture2D" uid="uid://bad258wi4b5v2" path="res://art/Objects/Chest.png" id="1_2kcav"]
 [ext_resource type="Script" path="res://objects/Chest.gd" id="2_xumdr"]
 [ext_resource type="PackedScene" uid="uid://ri4vqebv4pev" path="res://game_components/interact_area.tscn" id="3_i4eds"]
 [ext_resource type="AudioStream" uid="uid://2kjrsqbvqgdq" path="res://audio/sounds/chest-opening-87569.mp3" id="4_oqmgd"]
+[ext_resource type="PackedScene" uid="uid://dcg8rapme8evs" path="res://objects/stone.tscn" id="5_4co3f"]
+[ext_resource type="PackedScene" uid="uid://cpu8sebru3wf" path="res://game_components/inventory_container.tscn" id="6_3nf7n"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_slhms"]
+animation = &"chest_close"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ijw6u"]
 animation = &"chest_closed"
@@ -19,21 +24,55 @@ switch_mode = 2
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4xpva"]
-advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nxfur"]
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_00hea"]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1v53f"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wd7my"]
+switch_mode = 2
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_sh23h"]
+states/chest_close/node = SubResource("AnimationNodeAnimation_slhms")
+states/chest_close/position = Vector2(496, 197)
 states/chest_closed/node = SubResource("AnimationNodeAnimation_ijw6u")
 states/chest_closed/position = Vector2(332, 100)
 states/chest_open/node = SubResource("AnimationNodeAnimation_7h1ts")
 states/chest_open/position = Vector2(496, 100)
 states/chest_used/node = SubResource("AnimationNodeAnimation_41oos")
 states/chest_used/position = Vector2(705, 100)
-transitions = ["chest_open", "chest_used", SubResource("AnimationNodeStateMachineTransition_dn3e6"), "chest_used", "End", SubResource("AnimationNodeStateMachineTransition_4xpva"), "Start", "chest_closed", SubResource("AnimationNodeStateMachineTransition_nxfur"), "chest_closed", "chest_open", SubResource("AnimationNodeStateMachineTransition_00hea")]
+transitions = ["chest_open", "chest_used", SubResource("AnimationNodeStateMachineTransition_dn3e6"), "chest_used", "End", SubResource("AnimationNodeStateMachineTransition_4xpva"), "Start", "chest_closed", SubResource("AnimationNodeStateMachineTransition_nxfur"), "chest_closed", "chest_open", SubResource("AnimationNodeStateMachineTransition_00hea"), "chest_used", "chest_close", SubResource("AnimationNodeStateMachineTransition_1v53f"), "chest_close", "chest_closed", SubResource("AnimationNodeStateMachineTransition_wd7my")]
+
+[sub_resource type="Animation" id="Animation_272dm"]
+resource_name = "chest_close"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [3, 2, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="Animation" id="Animation_tlxip"]
 resource_name = "chest_closed"
@@ -77,6 +116,20 @@ tracks/1/keys = {
 "update": 1,
 "values": [true, false]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.9),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"open_chest"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_upsof"]
 resource_name = "chest_used"
@@ -96,6 +149,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ergqa"]
 _data = {
+"chest_close": SubResource("Animation_272dm"),
 "chest_closed": SubResource("Animation_tlxip"),
 "chest_open": SubResource("Animation_elyg4"),
 "chest_used": SubResource("Animation_upsof")
@@ -139,4 +193,13 @@ interact_value = "Opening Chest"
 stream = ExtResource("4_oqmgd")
 max_polyphony = 32
 
+[node name="StoneTemplate" parent="." instance=ExtResource("5_4co3f")]
+position = Vector2(13.2724, 14.8421)
+
+[node name="InventoryContainer" parent="." instance=ExtResource("6_3nf7n")]
+visible = false
+has_hotbar = false
+has_close_button = true
+
 [connection signal="interaction_executed" from="InteractArea" to="." method="_on_interact_area_interaction_executed"]
+[connection signal="inventory_closed" from="InventoryContainer" to="." method="_on_inventory_container_inventory_closed"]

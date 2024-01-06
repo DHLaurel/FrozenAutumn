@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CollectibleResource" load_steps=3 format=3 uid="uid://dmdy1cbje7gqf"]
+
+[ext_resource type="Texture2D" uid="uid://nko7ja1u5o5t" path="res://art/Objects/Items/icon_stone.png" id="1_67ni8"]
+[ext_resource type="Script" path="res://game_components/resources/collectible_resource.gd" id="2_4ftp6"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("2_4ftp6")
+icon = ExtResource("1_67ni8")
+consumable = false
+equippable = false
+stackable = true
+max_stack = 64

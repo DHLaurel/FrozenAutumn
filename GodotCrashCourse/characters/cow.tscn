@@ -7,7 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://tlvpr46jrju2" path="res://audio/sounds/cow-moo-1744.mp3" id="5_uosoe"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2avao"]
-size = Vector2(16, 3)
+size = Vector2(16, 4)
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_h71h7"]
 animation = &"idle_right"
@@ -188,6 +188,7 @@ _data = {
 }
 
 [node name="Cow" type="CharacterBody2D"]
+process_mode = 1
 position = Vector2(2, -13)
 script = ExtResource("1_qaw05")
 _bark_list = Array[String](["moo", "moo", "meoh.... err...", "moo", "moo", "moo", "moo", "moo", "moo", "moo", "moo", "moo", "", ""])
@@ -200,7 +201,7 @@ vframes = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 y_sort_enabled = true
-position = Vector2(-2, 9.5)
+position = Vector2(-2, 9)
 shape = SubResource("RectangleShape2D_2avao")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]

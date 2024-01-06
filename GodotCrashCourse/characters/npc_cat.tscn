@@ -244,6 +244,7 @@ graph_offset = Vector2(-545.971, 0)
 size = Vector2(20, 21)
 
 [node name="NPC_Cat" type="CharacterBody2D"]
+process_mode = 1
 position = Vector2(0, -8)
 script = ExtResource("1_q38yk")
 bark_frequency = 0.5
@@ -253,7 +254,6 @@ _bark_list = Array[String](["meow...", "Kwhy is it always so bright outside?", "
 texture = ExtResource("2_e5wkm")
 hframes = 4
 vframes = 4
-frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 5)

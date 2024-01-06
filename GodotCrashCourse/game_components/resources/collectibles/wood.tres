@@ -4,10 +4,10 @@
 [ext_resource type="Script" path="res://game_components/resources/collectible_resource.gd" id="1_er6m3"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("1_er6m3")
 icon = ExtResource("1_2xckg")
 consumable = false
 equippable = false
 stackable = true
 max_stack = 64
-stack_count = 1

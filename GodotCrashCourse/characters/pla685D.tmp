@@ -513,7 +513,6 @@ texture_progress = ExtResource("3_svm7j")
 [node name="InventoryContainer" parent="." instance=ExtResource("4_nhakm")]
 visible = false
 position = Vector2(-245, -119)
-has_hotbar = true
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="area_entered" from="InteractionComponents/InteractionDirection/InteractionArea" to="." method="_on_interaction_area_area_entered"]

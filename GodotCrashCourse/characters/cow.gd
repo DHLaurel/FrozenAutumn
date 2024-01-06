@@ -123,14 +123,19 @@ func choose_bark_message():
 func bark_randomly():
 	var tree = get_tree()
 	if tree:
-		var bark_message = choose_bark_message()
-		if _debug: print(name, "Barking randomly")
-		await(bark(bark_message))
-		var bark_delay = randf_range((1 / bark_frequency) * 0.25, (1 / bark_frequency) * 2.0) # randomly pick around the frequency to make the barks seem less predictable
-		if _debug: print(name, "bark_delay_start")
-		await(get_tree().create_timer(bark_delay).timeout)
-		if _debug: print(name, "bark_delay_stop, bark_delay: ", bark_delay)
-		bark_randomly()
+		if GlobalNode.paused:
+			await(tree.create_timer(2.0 / bark_frequency).timeout)
+			bark_randomly()
+		else:
+			var bark_message = choose_bark_message()
+			if _debug: print(name, "Barking randomly")
+			await(bark(bark_message))
+			var bark_delay = randf_range((0.25 / bark_frequency), (2.0 / bark_frequency)) # randomly pick around the frequency to make the barks seem less predictable
+			if _debug: print(name, "bark_delay_start")
+			await(tree.create_timer(bark_delay).timeout)
+			if _debug: print(name, "bark_delay_stop, bark_delay: ", bark_delay)
+			bark_randomly()
+	
 
 
 func _on_interact_area_attack_executed():

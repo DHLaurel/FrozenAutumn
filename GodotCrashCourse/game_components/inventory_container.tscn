@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cpu8sebru3wf"]
+[gd_scene load_steps=10 format=3 uid="uid://cpu8sebru3wf"]
 
 [ext_resource type="Texture2D" uid="uid://bqhscc4njan1l" path="res://art/UI/Complete_GUI_Essential_Pack_v2.2/02_Paper_Collection/01_Paper_Theme/Sprites/UI_Paper_Frame_01_Horizontal.png" id="1_ng1nx"]
 [ext_resource type="Texture2D" uid="uid://c8lxkkqbdmkw5" path="res://art/UI/Complete_GUI_Essential_Pack_v2.2/02_Paper_Collection/01_Paper_Theme/Sprites/UI_Paper_Cross_Small.png" id="2_dg4rv"]
@@ -8,15 +8,18 @@
 [ext_resource type="Texture2D" uid="uid://cxgc00tisyms8" path="res://art/UI/Complete_GUI_Essential_Pack_v2.2/02_Paper_Collection/01_Paper_Theme/Sprites/UI_Paper_Select_01a1.png" id="5_uk14n"]
 [ext_resource type="Texture2D" uid="uid://bwffe2vx7uv56" path="res://art/UI/Complete_GUI_Essential_Pack_v2.2/02_Paper_Collection/01_Paper_Theme/Sprites/UI_Paper_Select_01a3.png" id="7_ldga3"]
 [ext_resource type="Texture2D" uid="uid://btahg6xhbk5dl" path="res://art/UI/Complete_GUI_Essential_Pack_v2.2/02_Paper_Collection/01_Paper_Theme/Sprites/UI_Paper_Select_02a2.png" id="8_gqdy8"]
+[ext_resource type="Script" path="res://game_components/InventorySlot.gd" id="9_prjin"]
 
 [node name="InventoryContainer" type="CanvasGroup"]
+process_mode = 2
 z_index = 10
 script = ExtResource("2_e788r")
 inventory_panel_path = NodePath("InventoryPanel")
 item_slot_template_path = NodePath("InventoryPanel/ItemSlotTemplate")
-item_template_path = NodePath("InventoryPanel/ItemSlotTemplate/ItemTemplate")
-stack_count_template_path = NodePath("InventoryPanel/ItemSlotTemplate/StackCountTemplate")
-max_slots = Vector2i(36, 2)
+item_texture_template_path = NodePath("InventoryPanel/ItemSlotTemplate/ItemTextureTemplate")
+stack_count_template_path = NodePath("InventoryPanel/ItemSlotTemplate/StackCountLabelTemplate")
+max_slots = Vector2i(14, 4)
+gap_adjustment = Vector2(20, 45)
 
 [node name="Background" type="NinePatchRect" parent="."]
 modulate = Color(1, 1, 1, 0.780392)
@@ -25,7 +28,7 @@ anchor_bottom = 1.0
 offset_left = 96.0
 offset_top = 58.0
 offset_right = 396.0
-offset_bottom = 208.0
+offset_bottom = 148.0
 grow_vertical = 2
 texture = ExtResource("1_ng1nx")
 region_rect = Rect2(-0.51186, -0.148476, 96.6183, 32.8367)
@@ -54,12 +57,13 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 95.0
-offset_top = 61.0
-offset_right = 395.0
-offset_bottom = 81.0
+offset_left = 96.0
+offset_top = 60.0
+offset_right = 396.0
+offset_bottom = 110.0
 grow_horizontal = 2
 grow_vertical = 0
+scale = Vector2(1, 0.44)
 texture = ExtResource("4_ba1y3")
 region_rect = Rect2(15.7038, 7.41875, 64.3221, 16.8913)
 patch_margin_left = 14
@@ -71,21 +75,24 @@ metadata/_edit_use_anchors_ = true
 [node name="ItemSlotTemplate" type="TextureButton" parent="InventoryPanel"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.00333333
-anchor_top = -0.1
-anchor_right = 0.00333333
-anchor_bottom = -0.1
+anchor_left = 0.0133333
+anchor_top = 0.0109091
+anchor_right = 0.0133333
+anchor_bottom = 0.0109091
 offset_left = 7.0
 offset_top = 4.0
 offset_right = 39.0
 offset_bottom = 36.0
-scale = Vector2(0.23833, 0.23833)
+scale = Vector2(0.583499, 1.3435)
+action_mode = 0
+keep_pressed_outside = true
 texture_normal = ExtResource("5_uk14n")
 texture_pressed = ExtResource("7_ldga3")
 texture_hover = ExtResource("8_gqdy8")
+script = ExtResource("9_prjin")
 metadata/_edit_use_anchors_ = true
 
-[node name="ItemTemplate" type="TextureRect" parent="InventoryPanel/ItemSlotTemplate"]
+[node name="ItemTextureTemplate" type="TextureRect" parent="InventoryPanel/ItemSlotTemplate"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = -0.321469
@@ -98,19 +105,25 @@ offset_right = 39.4829
 offset_bottom = 73.05
 metadata/_edit_use_anchors_ = true
 
-[node name="StackCountTemplate" type="Label" parent="InventoryPanel/ItemSlotTemplate"]
+[node name="StackCountLabelTemplate" type="Label" parent="InventoryPanel/ItemSlotTemplate"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 1.17627
-anchor_top = -1.44945
-anchor_right = 1.17627
-anchor_bottom = -1.44945
+anchor_left = 0.788451
+anchor_top = -1.51086
+anchor_right = 3.35095
+anchor_bottom = -0.573365
 offset_left = -16.6614
 offset_top = 67.3618
 offset_right = 12.3386
 offset_bottom = 93.3618
-scale = Vector2(0.316478, 0.298423)
+scale = Vector2(0.172077, 0.16226)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "x0
-"
+theme_override_font_sizes/font_size = 38
+horizontal_alignment = 2
+vertical_alignment = 2
+clip_text = true
 metadata/_edit_use_anchors_ = true
+
+[connection signal="button_up" from="CloseButton" to="." method="_on_close_button_button_up"]
+[connection signal="pressed" from="InventoryPanel/ItemSlotTemplate" to="InventoryPanel/ItemSlotTemplate" method="_on_pressed"]
+[connection signal="slot_pressed" from="InventoryPanel/ItemSlotTemplate" to="." method="_on_item_slot_template_slot_pressed"]
